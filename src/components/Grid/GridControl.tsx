@@ -1,82 +1,99 @@
-import { useState } from "react";
-import { RadioGroup } from "@headlessui/react";
+import { Fragment, useState } from 'react'
+import { Listbox, Transition } from '@headlessui/react'
+import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
-const controls = [
-  { id: 1, name: "Top 10" },
-  { id: 2, name: "Top 40" },
-  { id: 3, name: "Top 100" },
-  { id: 4, name: "Custom" },
-];
-
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
-}
+const control = [
+  { id: 0, name: 'Top 10' },
+  { id: 1, name: 'Top 40' },
+  { id: 2, name: 'Top 100' },
+  { id: 3, name: 'Collage' },
+]
 
 export default function GridControl({}) {
-  const [selected, setSelected] = useState("top10");
+  const [selected, setSelected] = useState(control[0])
+
   return (
-    <>
-      <div className="p-2">
-        <RadioGroup
-          value={selected}
-          onChange={setSelected}
-          className="rounded-md grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-2"
-        >
-          {controls.map((control) => (
-            <RadioGroup.Option
-              key={control.id}
-              value={control.name}
-              className={({ checked }) =>
-                classNames(
-                  checked
-                    ? "bg-indigo-50 dark:bg-indigo-800 border-indigo-200 dark:border-indigo-800"
-                    : "border-gray-200 dark:border-gray-800",
-                  "bg-gray-100 dark:bg-gray-900 border p-4 cursor-pointer focus:outline-none rounded-md"
-                )
-              }
-            >
-              {({ active, checked }) => (
-                <>
-                  <div className="flex items-center text-sm">
-                    <span
-                      className={classNames(
-                        checked
-                          ? "bg-indigo-600 border-transparent"
-                          : "bg-white border-gray-300",
-                        active ? "ring-2 ring-offset-2 ring-indigo-500" : "",
-                        "h-4 w-4 rounded-full border flex items-center justify-center"
-                      )}
-                      aria-hidden="true"
-                    >
-                      <span className="rounded-full bg-white w-1.5 h-1.5" />
-                    </span>
-                    <RadioGroup.Label
-                      as="span"
-                      className={classNames(
-                        checked ? "text-indigo-900" : "text-gray-900",
-                        "ml-3 font-medium dark:text-white text-black"
-                      )}
-                    >
-                      {control.name}
-                    </RadioGroup.Label>
-                  </div>
-                </>
-              )}
-            </RadioGroup.Option>
-          ))}
-          {selected == "Custom" &&
-            <input
-              type="number"
-              min="101"
-              max="1000"
-              name="Custom"
-              id="custom"
-              placeholder="e.g 200 (max 1000)"
-              className="bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-800 w-full p-3.5 shadow-sm border cursor-pointer focus:outline-none rounded-md"
-            />
+    <div className="p-2 rounded-md grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-2">
+      <Listbox value={selected} onChange={setSelected}>
+        <div className="relative">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-gray-100 dark:bg-gray-900 text-black dark:text-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+            <span className="block truncate">{selected.name}</span>
+            <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+              <SelectorIcon
+                className="w-5 h-5 text-gray-400"
+                aria-hidden="true"
+              />
+            </span>
+          </Listbox.Button>
+          {/*<Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-0"
+            leaveTo="opacity-0"
+          >*/}
+            <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-gray-100 dark:bg-gray-900 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {control.map((control, controlIdx) => (
+                <Listbox.Option
+                  key={controlIdx}
+                  className={({ active }) =>
+                    `${active ? 'text-purple-900 bg-purple-500' : 'text-gray-900'}
+                          cursor-default select-none relative py-2 pl-10 pr-4 text-black dark:text-white`
+                  }
+                  value={control}
+                >
+                  {({ selected, active }) => (
+                    <>
+                      <span
+                        className={`${
+                          selected ? 'font-medium' : 'font-normal'
+                        } block truncate`}
+                      >
+                        {control.name}
+                      </span>
+                      {selected ? (
+                        <span
+                          className={`${
+                            active ? 'text-purple-600' : 'text-purple-600'
+                          }
+                                absolute inset-y-0 left-0 flex items-center pl-3`}
+                        >
+                          <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                        </span>
+                      ) : null}
+                    </>
+                  )}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          {/*</Transition>*/}
+          {selected == control[3] &&
+          <div>
+            <label>
+              <span className="text-black dark:text-white">Rows:</span>
+              <input
+                className="bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-800 w-full p-1.5 shadow-sm border focus:outline-none rounded-md"
+                type="number"
+                id="collage-rows"
+                min="1"
+                max="12"
+                placeholder="e.g 5"
+              />
+            </label>
+            <label>
+              <span className="text-black dark:text-white">Columns:</span>
+              <input
+                className="bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-800 w-full p-1.5 shadow-sm border focus:outline-none rounded-md"
+                type="number"
+                id="collage-columns"
+                min="1"
+                max="12"
+                placeholder="e.g 5"
+              />
+            </label>
+          </div>
           }
-        </RadioGroup>
-      </div>
-    </>
+        </div>
+      </Listbox>
+    </div>
   );
 }
