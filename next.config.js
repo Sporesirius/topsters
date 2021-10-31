@@ -7,8 +7,8 @@ const nextConfig = {
   poweredByHeader: false,
   swcMinify: true,
   experimental: {
-    concurrentFeatures: false,
-    serverComponents: false
+    concurrentFeatures: true,
+    serverComponents: true
   },
   cssLoaderOptions: {
     importLoaders: 1,
