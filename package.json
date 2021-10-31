@@ -1,0 +1,47 @@
+{
+  "name": "topsters",
+  "version": "0.1.0",
+  "description": "topsters.me - Create collages and album charts",
+  "homepage": "https://topsters.me",
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sporesirius/topsters.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sporesirius/topsters/issues"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --pretty --noEmit",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.4.1",
+    "next": "12.0.1",
+    "next-compose-plugins": "^2.2.1",
+    "next-themes": "^0.0.15",
+    "react": "^18.0.0-alpha-9c8161ba8-20211028",
+    "react-dom": "^18.0.0-alpha-9c8161ba8-20211028",
+    "react-icons": "^4.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.3.0",
+    "@tailwindcss/forms": "^0.3.4",
+    "@tailwindcss/line-clamp": "^0.2.2",
+    "@tailwindcss/typography": "^0.4.1",
+    "@types/node": "16.11.6",
+    "@types/react": "17.0.33",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "7",
+    "eslint-config-next": "12.0.1",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.19",
+    "typescript": "4.4.4"
+  }
+}
