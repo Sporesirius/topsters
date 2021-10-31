@@ -14,6 +14,9 @@ const nextConfig = {
     importLoaders: 1,
     localIdentName: "[local]_[hash:base64:5]",
   },
+  images: {
+    domains: ['socialistmodernism.com'],
+  },
 
   // Webpack
   webpack: function (config) {
