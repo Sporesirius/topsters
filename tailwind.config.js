@@ -51,6 +51,16 @@ module.exports = {
           },
         },
       },
+      gridTemplateColumns: {
+       't5': 'repeat(5, 200px)',
+       't7': 'repeat(7, 141.7px)',
+       't8': 'repeat(8, 123.5px)',
+      },
+      height: {
+        p200: '200px',
+        p141_7: '141.7px',
+        p120: '123.5px',
+       },
     },
   },
   plugins: [

@@ -1,24 +1,43 @@
+import Layout from '@components/Layouts/Layout';
+import Image from 'next/image'
+
 export default function Grid({}) {
-  const Grid = [
-    { id: 1, value: "1" },
-    { id: 2, value: "2" },
-    { id: 3, value: "3" },
-    { id: 4, value: "4" },
-    { id: 5, value: "5" },
-    { id: 6, value: "6" },
-    { id: 7, value: "7" },
-    { id: 8, value: "8" },
-    { id: 9, value: "9" },
+
+  const top40 = [
+    {
+      id: "1",
+      gridCols: "grid-cols-t5",
+      gridCount: 10,
+      height: "h-p200",
+    },
+    {
+      id: "2",
+      gridCols: "grid-cols-t7",
+      gridCount: 14,
+      height: "h-p141_7",
+    },
+    {
+      id: "3",
+      gridCols: "grid-cols-t8",
+      gridCount: 16,
+      height: "h-p120",
+    },
   ];
+
   return (
     <>
-      <div className="grid grid-cols-3 gap-3">
-        {Grid.map((item) => (
-          <div key={item.id} className="bg-blue-600 py-6 rounded-lg shadow-lg">
-            <div className="font-extrabold">{item.value}</div>
-          </div>
+      <div>
+        {top40.map((item) => (
+            <>
+            <div className={`mt-1 grid gap-1 ${item.gridCols}`}>
+              {[...Array(item.gridCount)].map(() => ( 
+                <div key={item.id} className={`bg-blue-600 ${item.height}`}>1</div>
+              ))}
+            </div>
+            </>
         ))}
       </div>
+
     </>
   );
 }
