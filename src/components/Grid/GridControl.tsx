@@ -5,8 +5,9 @@ import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 const control = [
   { id: 0, name: 'Top 10' },
   { id: 1, name: 'Top 40' },
-  { id: 2, name: 'Top 100' },
-  { id: 3, name: 'Collage' },
+  { id: 2, name: 'Top 69' },
+  { id: 3, name: 'Top 100' },
+  { id: 4, name: 'Collage' },
 ]
 
 export default function GridControl({}) {

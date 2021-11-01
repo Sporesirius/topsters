@@ -53,13 +53,17 @@ module.exports = {
       },
       gridTemplateColumns: {
        't5': 'repeat(5, 200px)',
+       't6': 'repeat(6, 166.0px)',
        't7': 'repeat(7, 141.7px)',
        't8': 'repeat(8, 123.5px)',
+       't9': 'repeat(9, 109.34px)',
       },
       height: {
         p200: '200px',
+        p166: '166px',
         p141_7: '141.7px',
         p120: '123.5px',
+        p109: '109.34px',
        },
     },
   },
