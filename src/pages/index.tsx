@@ -1,23 +1,22 @@
-import type { ReactElement } from "react";
 import Layout from "@components/Layouts/Layout";
 import ThemeSwitcher from "@components/ThemeSwitcher/ThemeSwitcher";
-import Grid from "@components/Grid/Grid";
+import GridRender from "@components/Grid/GridRender";
 import GridControl from "@components/Grid/GridControl";
 
-export default function Page() {
+function IndexPage() {
+  const {renderGridControl, selected} = GridControl()
   return (
     <div className="h-screen grid grid-cols-12">
       <div className="col-start-1 col-end-4">
-        <GridControl/>
+        {renderGridControl}
         <ThemeSwitcher/>
       </div>
       <div className="col-start-4 col-end-13">
-        <Grid/>
+        <GridRender {...{selected}}/>
         </div>
     </div>
   );
 }
 
-Page.getLayout = function getLayout(page: ReactElement) {
-  return <Layout title="Topsters">{page}</Layout>;
-};
+IndexPage.PageLayout = Layout;
+export default IndexPage;

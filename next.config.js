@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const withPlugins = require("next-compose-plugins");
 
 // next.js configuration
@@ -6,16 +5,16 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   swcMinify: true,
-  experimental: {
-    concurrentFeatures: true,
-    serverComponents: true
+  removeConsole: {
+    exclude: ['error'],
+  },
+  i18n: {
+    locales: ["en-US"],
+    defaultLocale: "en-US"
   },
   cssLoaderOptions: {
     importLoaders: 1,
     localIdentName: "[local]_[hash:base64:5]",
-  },
-  images: {
-    domains: ['socialistmodernism.com'],
   },
 
   // Webpack
