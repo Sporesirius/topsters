@@ -1,0 +1,64 @@
+name: CI
+
+env:
+  PNPM_STORE_PATH: ${{github.workspace}}/.pnpm-store
+  PNPM_VERSION: latest
+  # Disable sourcemaps will speed up ci
+  # be sure to disable it if you intent to use the build
+  # done in this step (i.e: deploy, docker....)
+  NEXT_DISABLE_SOURCEMAPS: 1
+  NEXT_TELEMETRY_DISABLED: 1
+  # Speed up build cause they are linted in a previous step
+  NEXTJS_IGNORE_ESLINT: 1
+  NEXTJS_BUILD_TARGET: server
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: [ 16 ]
+        os: [ ubuntu-latest ]
+    steps:
+      - uses: actions/setup-node@v2.5.0
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: checkout code repository
+        uses: actions/checkout@v2.4.0
+          
+      - name: cache pnpm modules
+        uses: actions/cache@v2.1.7
+        env:
+          cache-name: cache-pnpm-modules
+        with:
+          path: ${{ env.PNPM_STORE_PATH }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: true
+
+      - name: typecheck
+        run: pnpm run typecheck
+
+      - name: lint
+        run: pnpm run lint
+
+      - name: build
+        run: pnpm run build
