@@ -2,7 +2,7 @@ const withPlugins = require("next-compose-plugins");
 
 // next.js configuration
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false, //temp fix
   poweredByHeader: false,
   swcMinify: true,
   removeConsole: {
@@ -11,6 +11,10 @@ const nextConfig = {
   i18n: {
     locales: ["en-US"],
     defaultLocale: "en-US"
+  },
+  experimental: {
+    runtime: "nodejs",
+    serverComponents: false,
   },
   cssLoaderOptions: {
     importLoaders: 1,

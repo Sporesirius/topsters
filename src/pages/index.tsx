@@ -1,19 +1,24 @@
+import dynamic from "next/dynamic";
 import Layout from "@components/Layouts/Layout";
-import ThemeSwitcher from "@components/ThemeSwitcher/ThemeSwitcher";
 import GridRender from "@components/Grid/GridRender";
 import GridControl from "@components/Grid/GridControl";
+//import KonvaTest from "@components/konva";
+const ThemeSwitcher = dynamic(() => import("@components/ThemeSwitcher/ThemeSwitcher"), {
+  ssr: false,
+});
 
 function IndexPage() {
-  const {renderGridControl, selected} = GridControl()
+  const {renderGridControl, selectedEntry} = GridControl()
   return (
     <div className="h-screen grid grid-cols-12">
       <div className="col-start-1 col-end-4">
         {renderGridControl}
-        <ThemeSwitcher/>
+        <ThemeSwitcher />
       </div>
       <div className="col-start-4 col-end-13">
-        <GridRender {...{selected}}/>
-        </div>
+        <GridRender {...{selectedEntry}}/>
+        {/*<KonvaTest />*/}
+      </div>
     </div>
   );
 }
